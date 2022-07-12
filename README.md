@@ -69,3 +69,9 @@ The test suite is run via `tox -e py38-win` or `tox -e py38-unix` depending on t
 ```
 mfa validate ./SoundCorpus nsyilxcn_mappings.txt
 ```
+
+```
+mfa train ./SoundCorpus nsyilxcn_mappings.txt ./mfa_data/new_acoustic_model.zip  # Export just the trained acoustic model
+mfa train ./SoundCorpus nsyilxcn_mappings.txt  ./mfa_data/my_corpus_aligned --clean # Export just the training alignments
+mfa train ./SoundCorpus nsyilxcn_mappings.txt  ./mfa_data/new_acoustic_model.zip ./mfa_data/my_corpus_aligned  # Export both trained model and alignments
+```
