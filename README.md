@@ -64,3 +64,8 @@ The test suite is run via `tox -e py38-win` or `tox -e py38-unix` depending on t
 * [MFA Models](https://github.com/MontrealCorpusTools/mfa-models)
 * [Eleanor Chodroff's MFA tutorial](https://www.eleanorchodroff.com/tutorial/montreal-forced-aligner-v2.html)
 * [@mmcauliffe's forced alignment blog posts](https://memcauliffe.com/tag/forced-alignment.html)
+
+## customized commands
+```
+mfa validate ./SoundCorpus nsyilxcn_mappings.txt
+```
