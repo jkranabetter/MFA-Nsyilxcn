@@ -65,11 +65,12 @@ The test suite is run via `tox -e py38-win` or `tox -e py38-unix` depending on t
 * [Eleanor Chodroff's MFA tutorial](https://www.eleanorchodroff.com/tutorial/montreal-forced-aligner-v2.html)
 * [@mmcauliffe's forced alignment blog posts](https://memcauliffe.com/tag/forced-alignment.html)
 
-## customized commands
+## Commands for this implimentation
+First, validate your data.
 ```
 mfa validate ./SoundCorpus nsyilxcn_mappings.txt
 ```
-
+Then we can train the acoustic model and export it + training alignments.
 ```
 mfa train ./SoundCorpus nsyilxcn_mappings.txt ./mfa_data/new_acoustic_model.zip  # Export just the trained acoustic model
 mfa train ./SoundCorpus nsyilxcn_mappings.txt  ./mfa_data/my_corpus_aligned --clean # Export just the training alignments
