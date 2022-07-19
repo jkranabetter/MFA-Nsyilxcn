@@ -1,11 +1,5 @@
 # Montreal Forced Aligner
 
-![Continuous Integration](https://github.com/MontrealCorpusTools/Montreal-Forced-Aligner/actions/workflows/main.yml/badge.svg)
-[![codecov](https://codecov.io/gh/MontrealCorpusTools/Montreal-Forced-Aligner/branch/main/graph/badge.svg?token=GgfM9GXFJ4)](https://codecov.io/gh/MontrealCorpusTools/Montreal-Forced-Aligner)
-[![Documentation Status](https://readthedocs.org/projects/montreal-forced-aligner/badge/?version=latest)](http://montreal-forced-aligner.readthedocs.io/en/latest/?badge=latest)
-[![Interrogate Status](https://montreal-forced-aligner.readthedocs.io/en/latest/_static/interrogate_badge.svg)](https://github.com/MontrealCorpusTools/montreal-forced-aligner/)
-[![DOI](https://zenodo.org/badge/44983969.svg)](https://zenodo.org/badge/latestdoi/44983969)
-
 The Montreal Forced Aligner is a command line utility for performing forced alignment of speech datasets using Kaldi (http://kaldi-asr.org/).
 
 Please see the documentation http://montreal-forced-aligner.readthedocs.io for installation and usage.
@@ -26,53 +20,47 @@ conda install -c conda-forge montreal-forced-aligner
 
 in your environment of choice.
 
-### Source installation
+### Setting up the environment
 
-If you'd like to install a local version of MFA or want to use the development set up, the easiest way is first create the dev environment from the yaml in the repo root directory:
-
+Running this repository for the first time you will need to create an environment using the command:
 ```
 conda env create -n mfa-dev -f environment.yml  # Linux or mac
-conda env create -n mfa-dev -f environment_win.yml  #  Windows
 ```
 
-Alternatively, the dependencies can be installed via:
-
+Next time, we only need to activate the enviroment using:
 ```
-conda install -c conda-forge python=3.8 kaldi sox librosa biopython praatio tqdm requests colorama pyyaml  # All platforms
-conda install -c conda-forge pynini openfst baumwelch ngram  # Additional dependencies to install on Linux or Mac
+conda activate mfa-dev
 ```
 
-MFA can be installed in develop mode via:
+You should be able to see appropriate output from the command `mfa version`
 
+
+fe's forced alignment blog posts](https://memcauliffe.com/tag/forced-alignment.html)
+
+## Commands for this implimentation
+First, validate your data.
 ```
-pip install -e .[dev]
+mfa validate --phone_set IPA ./SoundCorpus nsyilxcn_mappings.txt
+```
+Then we can train the acoustic model and export it + training alignments.
+```
+mfa train --phone_set IPA ./SoundCorpus nsyilxcn_mappings.txt ./mfa_data/new_acoustic_model.zip  # Export just the trained acoustic model
+mfa train --phone_set IPA ./SoundCorpus nsyilxcn_mappings.txt  ./mfa_data/my_corpus_aligned --clean # Export just the training alignments
+mfa train --phone_set IPA ./SoundCorpus nsyilxcn_mappings.txt  ./mfa_data/new_acoustic_model.zip ./mfa_data/my_corpus_aligned  # Export both trained model and alignments
 ```
 
-You should be able to see appropriate output from `mfa version`
+## Align
 
-#### Development
-
-The test suite is run via `tox -e py38-win` or `tox -e py38-unix` depending on the OS, and the docs are generated via `tox -e docs`
-
+Finally we can align on new data using our trained model:
+```
+mfa align ./input nsyilxcn_mappings.txt mfa_data/new_acoustic_model.zip ./output
+```
 
 ## Quick links
-
 * [Getting started docs](https://montreal-forced-aligner.readthedocs.io/en/latest/getting_started.html)
 * [User Guide](https://montreal-forced-aligner.readthedocs.io/en/latest/user_guide/index.html)
 * [API Reference](https://montreal-forced-aligner.readthedocs.io/en/latest/reference/index.html)
 * [Release notes](https://montreal-forced-aligner.readthedocs.io/en/latest/changelog/index.html)
 * [MFA Models](https://github.com/MontrealCorpusTools/mfa-models)
 * [Eleanor Chodroff's MFA tutorial](https://www.eleanorchodroff.com/tutorial/montreal-forced-aligner-v2.html)
-* [@mmcauliffe's forced alignment blog posts](https://memcauliffe.com/tag/forced-alignment.html)
-
-## Commands for this implimentation
-First, validate your data.
-```
-mfa validate ./SoundCorpus nsyilxcn_mappings.txt
-```
-Then we can train the acoustic model and export it + training alignments.
-```
-mfa train ./SoundCorpus nsyilxcn_mappings.txt ./mfa_data/new_acoustic_model.zip  # Export just the trained acoustic model
-mfa train ./SoundCorpus nsyilxcn_mappings.txt  ./mfa_data/my_corpus_aligned --clean # Export just the training alignments
-mfa train ./SoundCorpus nsyilxcn_mappings.txt  ./mfa_data/new_acoustic_model.zip ./mfa_data/my_corpus_aligned  # Export both trained model and alignments
-```
+* [@mmcaulif
