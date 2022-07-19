@@ -3,7 +3,6 @@ __pycache__/
 *.py[cod]
 *.exe
 *.zip
-*.txt
 *.lab
 *.dict
 !tests/data/dictionaries/*.dict
