@@ -69,10 +69,7 @@ mfa train --phone_set IPA ./SoundCorpus nsyilxcn_mappings.txt  ./mfa_data/new_ac
 ```
 
 ### 4.4) Align using the Trained Model
-Finally we can align on new data using our trained model:
-```
-mfa align ./input nsyilxcn_mappings.txt mfa_data/new_acoustic_model.zip ./output
-```
+If training was successful, you’ll now see the TextGrids in the output directory ```mfa_data```, assuming you wanted to export them. The TextGrid export is identical to if you had run mfa align with the trained acoustic model.
 
 ## References
  - [1] https://scholarspace.manoa.hawaii.edu/server/api/core/bitstreams/5fd5e5c0-b211-460f-ad74-fb2e14e61709/content
